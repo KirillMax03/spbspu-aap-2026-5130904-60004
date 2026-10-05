@@ -2,5 +2,5 @@
 
 int main ()
 {
-std::cout <<"maksimov.kirill\n";
+  std::cout <<"maksimov.kirill\n";
 }
