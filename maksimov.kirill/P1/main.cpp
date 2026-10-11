@@ -49,7 +49,7 @@ int main()
 {
   try
   {
-    int result = maksimov::countSumRec();
+    const int result = maksimov::countSumRec();
 
     std::cout << result << "\n";
 
