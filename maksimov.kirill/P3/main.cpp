@@ -125,7 +125,7 @@ long long maksimov::findMinDiagonalSum(int n, int m, const int *data)
 {
   const int lastDiagonal = n + m - 2;
   long long minSum = 0;
-  bool isFirst = true;
+  bool is_first = true;
 
   for (int diagonal = 0; diagonal <= lastDiagonal && n > 0 && m > 0; ++diagonal)
   {
@@ -139,10 +139,10 @@ long long maksimov::findMinDiagonalSum(int n, int m, const int *data)
       }
     }
 
-    if (isFirst || sum < minSum)
+    if (is_first || sum < minSum)
     {
       minSum = sum;
-      isFirst = false;
+      is_first = false;
     }
   }
 
