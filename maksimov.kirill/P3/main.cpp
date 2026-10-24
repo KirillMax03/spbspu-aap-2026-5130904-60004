@@ -4,8 +4,8 @@
 
 namespace maksimov
 {
-  void readSize(const char *fileName, int &n, int &m);
-  void readElements(const char *fileName, int n, int m, int *data);
+  void readSize(const char *file_name, int &n, int &m);
+  void readElements(const char *file_name, int n, int m, int *data);
   long long findMinDiagonalSum(int n, int m, const int *data);
 }
 
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 
 void maksimov::readSize(const char *fileName, int &n, int &m)
 {
-  std::ifstream file(fileName);
+  std::ifstream file(file_name);
   if (!file)
   {
     throw std::runtime_error("Error open file");
@@ -96,15 +96,15 @@ void maksimov::readSize(const char *fileName, int &n, int &m)
 
 void maksimov::readElements(const char *fileName, int n, int m, int *data)
 {
-  std::ifstream file(fileName);
+  std::ifstream file(file_name);
   if (!file)
   {
     throw std::runtime_error("Error open file");
   }
 
-  int headerN = 0;
-  int headerM = 0;
-  if (!(file >> headerN >> headerM))
+  int header_n = 0;
+  int header_m = 0;
+  if (!(file >> header_n >> header_m))
   {
     throw std::runtime_error("Cannot read matrix size");
   }
@@ -123,11 +123,11 @@ void maksimov::readElements(const char *fileName, int n, int m, int *data)
 
 long long maksimov::findMinDiagonalSum(int n, int m, const int *data)
 {
-  const int lastDiagonal = n + m - 2;
-  long long minSum = 0;
+  const int last_diagonal = n + m - 2;
+  long long min_sum = 0;
   bool is_first = true;
 
-  for (int diagonal = 0; diagonal <= lastDiagonal && n > 0 && m > 0; ++diagonal)
+  for (int diagonal = 0; diagonal <= last_diagonal && n > 0 && m > 0; ++diagonal)
   {
     long long sum = 0;
     for (int i = 0; i < n; ++i)
@@ -139,12 +139,12 @@ long long maksimov::findMinDiagonalSum(int n, int m, const int *data)
       }
     }
 
-    if (is_first || sum < minSum)
+    if (is_first || sum < min_sum)
     {
-      minSum = sum;
+      min_sum = sum;
       is_first = false;
     }
   }
 
-  return minSum;
+  return min_sum;
 }
