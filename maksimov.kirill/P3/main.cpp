@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 #include <fstream>
 #include <stdexcept>
 
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
   }
 }
 
-void maksimov::readSize(const char *fileName, int &n, int &m)
+void maksimov::readSize(const char *file_name, int &n, int &m)
 {
   std::ifstream file(file_name);
   if (!file)
@@ -94,7 +95,7 @@ void maksimov::readSize(const char *fileName, int &n, int &m)
   }
 }
 
-void maksimov::readElements(const char *fileName, int n, int m, int *data)
+void maksimov::readElements(const char *file_name, int n, int m, int *data)
 {
   std::ifstream file(file_name);
   if (!file)
