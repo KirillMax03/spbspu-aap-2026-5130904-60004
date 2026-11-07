@@ -6,7 +6,7 @@
 namespace maksimov
 {
   char *readChar(std::istream &in);
-  std::size_t excludeChar(const char *source, const char *excluded, char *result, std::size_t resultSize);
+  std::size_t excludeChar(const char *source, const char *excluded, char *result, std::size_t result_size);
 }
 
 int main()
@@ -17,6 +17,12 @@ int main()
   try
   {
     str = maksimov::readChar(std::cin);
+    if (str[0] == '\0')
+    {
+      std::cerr « "No input\n";
+      delete[] str;
+      return 1;
+    }
     const std::size_t size = std::strlen(str) + 1;
     result = new char[size];
     maksimov::excludeChar(str, excluded, result, size);
@@ -70,7 +76,7 @@ char *maksimov::readChar(std::istream &in)
   return line;
 }
 
-std::size_t maksimov::excludeChar(const char *source, const char *excluded, char *result, std::size_t resultSize)
+std::size_t maksimov::excludeChar(const char *source, const char *excluded, char *result, std::size_t result_size)
 {
   std::size_t total = 0;
   std::size_t written = 0;
@@ -80,7 +86,7 @@ std::size_t maksimov::excludeChar(const char *source, const char *excluded, char
     if (found == nullptr)
     {
       ++total;
-      if (written + 1 < resultSize)
+      if (written + 1 < result_size)
       {
         result[written] = source[i];
         ++written;
