@@ -11,7 +11,7 @@ namespace maksimov
     std::size_t operator()() const;
 
   private:
-    const std::size_t minLength_ ;
+    const std::size_t min_length_;
     long long pre1_;
     long long pre2_;
     std::size_t count_;
@@ -20,7 +20,7 @@ namespace maksimov
 }
 
 maksimov::SumDupCount::SumDupCount() :
-  minLength_(3),
+  min_length_(3),
   pre1_(0),
   pre2_(0),
   count_(0),
@@ -30,7 +30,7 @@ maksimov::SumDupCount::SumDupCount() :
 void maksimov::SumDupCount::operator()(int num)
 {
   ++count_;
-  if (count_ >= minLength_ && num == pre1_ + pre2_)
+  if (count_ >= min_length_ && num == pre1_ + pre2_)
   {
     ++matches_;
   }
@@ -40,7 +40,7 @@ void maksimov::SumDupCount::operator()(int num)
 
 std::size_t maksimov::SumDupCount::operator()() const
 {
-  if (count_ < minLength_)
+  if (count_ < min_length_)
   {
     throw std::length_error("Error: sequence too short");
   }
