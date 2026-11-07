@@ -19,7 +19,7 @@ int main()
     str = maksimov::readChar(std::cin);
     if (str[0] == '\0')
     {
-      std::cerr « "No input\n";
+      std::cerr << "No input\n";
       delete[] str;
       return 1;
     }
