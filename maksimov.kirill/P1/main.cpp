@@ -1,70 +1,81 @@
+#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 
 namespace maksimov
 {
-  int countSumRec()
+  struct SumDupCount
   {
-    const int min_length = 3;
-    long long pre1 = 0;
-    long long pre2 = 0;
-    int sum = 0;
-    int matches = 0;
+    SumDupCount();
+    void operator()(int num);
+    std::size_t operator()() const;
 
-    while (true)
-    {
-      int num = 0;
+  private:
+    const std::size_t minLength_ ;
+    long long pre1_;
+    long long pre2_;
+    std::size_t count_;
+    std::size_t matches_;
+  };
+}
 
-      if (!(std::cin >> num))
-      {
-        throw std::invalid_argument("Error: invalid input format");
-      }
+maksimov::SumDupCount::SumDupCount() :
+  minLength_(3),
+  pre1_(0),
+  pre2_(0),
+  count_(0),
+  matches_(0)
+{}
 
-      if (num == 0)
-      {
-        break;
-      }
-
-      ++sum;
-
-      if (sum >= min_length && num == pre1 + pre2)
-      {
-        ++matches;
-      }
-
-      pre2 = pre1;
-      pre1 = num;
-    }
-
-    if (sum < min_length)
-    {
-      throw std::length_error("Error: sequence too short");
-    }
-
-    return matches;
+void maksimov::SumDupCount::operator()(int num)
+{
+  ++count_;
+  if (count_ >= minLength_ && num == pre1_ + pre2_)
+  {
+    ++matches_;
   }
+  pre2_ = pre1_;
+  pre1_ = num;
+}
+
+std::size_t maksimov::SumDupCount::operator()() const
+{
+  if (count_ < minLength_)
+  {
+    throw std::length_error("Error: sequence too short");
+  }
+  return matches_;
 }
 
 int main()
 {
   try
   {
-    const int result = maksimov::countSumRec();
-
-    std::cout << result << "\n";
-
+    maksimov::SumDupCount counter;
+    int value = 0;
+    while (true)
+    {
+      if (!(std::cin >> value))
+      {
+        throw std::invalid_argument("Error: invalid input format");
+      }
+      if (value == 0)
+      {
+        break;
+      }
+      counter(value);
+    }
+    std::cout << counter() << "\n";
     return 0;
   }
-  catch (const std::invalid_argument& e)
+  catch (const std::invalid_argument &e)
   {
     std::cerr << e.what() << "\n";
-
     return 1;
   }
-  catch (const std::length_error& e)
+  catch (const std::length_error &e)
   {
     std::cerr << e.what() << "\n";
-
     return 2;
   }
 }
