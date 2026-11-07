@@ -19,7 +19,7 @@ namespace maksimov
   };
 }
 
-maksimov::SumDupCount::SumDupCount() :
+maksimov::SumDupCount::SumDupCount():
   min_length_(3),
   pre1_(0),
   pre2_(0),
